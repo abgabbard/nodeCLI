@@ -9,6 +9,117 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const team = [];
+
+function newMember() {
+    inquirer.prompt([
+        {
+            type: "checkbox",
+            name: "employeeType",
+            message: "What is your role at the company?",
+            choices: ["Manager", "Intern", "Engineer"],    
+        },
+    ]).then((data) => {
+        if (data.employeeType === "manager") {
+            getManager();
+        } else if (data.employeeType === "engineer") {
+            getEngineer();
+        } else if (data.employeeType === "intern") {
+            getIntern();
+        }
+    })
+}
+newMember(); 
+
+function getManager() {
+inquirer.prompt([
+    {
+        type: "input",
+        message: "What is your employer ID?",
+        name: "ID",
+      },
+      {
+        type: "input",
+        message: "What is your email?",
+        name: "Email",
+      },
+      {
+        type: "input",
+        message: "What is your office number?",
+        name: "officeNumber",
+      },
+]).then((data) => {
+    const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
+    team.push(manager);
+})};
+
+function getEngineer() {
+inquirer.prompt([
+    {
+        type: "input",
+        message: "What is your employer ID?",
+        name: "ID",
+      },
+      {
+        type: "input",
+        message: "What is your email?",
+        name: "Email",
+      },
+      {
+        type: "input",
+        message: "What is your github username?",
+        name: "GitHub",
+      },
+]).then((data) => {
+    const engineer = new Engineer(data.name, data.id, data.email, data.GitHub);
+    team.push(engineer);
+    addNewMember();
+})};
+
+function getIntern() {
+inquirer.prompt([
+    {
+        type: "input",
+        message: "What is your employer ID?",
+        name: "ID",
+      },
+      {
+        type: "input",
+        message: "What is your email?",
+        name: "Email",
+      },
+      {
+        type: "input",
+        message: "What school are you attending?",
+        name: "school",
+      },
+]).then((data) => {
+    const intern = new Intern(data.name, data.id, data.email, data.school);
+    team.push(intern);
+    addNewMember();
+})}
+
+
+function addNewMember() {
+  inquirer
+  .prompt([
+    {
+      name: "addNewMember",
+      type: "confirm",
+      message: "Do you want to add another team member?",
+    },
+  ])
+  .then((data) => {
+    console.log(data.addNewMember);
+    // WE SHOULD INSERT CODE HERE TO REPEAT QUESTIONS - FROM BEGINNING. 
+  });
+}
+
+renderHtml() {
+  fs.writeFile(outputPath, render(team) (err) => { 
+    err ? console.log(err) : console.log("success!")
+}
+
 
 
 // Write code to use inquirer to gather information about the development team members,
