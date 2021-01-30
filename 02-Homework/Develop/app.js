@@ -109,18 +109,18 @@ function addNewMember() {
       message: "Do you want to add another team member?",
     },
   ])
-  .then((data) => {
-    console.log(data.addNewMember);
-    // WE SHOULD INSERT CODE HERE TO REPEAT QUESTIONS - FROM BEGINNING. 
+  .then((data) => { if (data.type === true) {
+      newMember();
+  } else {
+      renderHtml();
+  }; 
   });
 }
 
-renderHtml() {
-  fs.writeFile(outputPath, render(team) (err) => { 
-    err ? console.log(err) : console.log("success!")
-}
 
-
+function renderHtml() {
+    fs.writeFileSync(outputPath, render(team), "utp-8");
+    };
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
