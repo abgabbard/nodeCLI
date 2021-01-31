@@ -11,7 +11,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 const team = [];
 
-function newMember() {
+function newExecute() {
     inquirer.prompt([
         {
             type: "checkbox",
@@ -20,16 +20,17 @@ function newMember() {
             choices: ["Manager", "Intern", "Engineer"],    
         },
     ]).then((data) => {
-        if (data.employeeType === "manager") {
+      const typeChecker = data.employeeType.toString();
+        if (typeChecker === "Manager") {
             getManager();
-        } else if (data.employeeType === "engineer") {
+        } else if (typeChecker === "Engineer") {
             getEngineer();
-        } else if (data.employeeType === "intern") {
+        } else if (typeChecker === "Intern") {
             getIntern();
         }
     })
 }
-newMember(); 
+newExecute(); 
 
 function getManager() {
 inquirer.prompt([
@@ -51,6 +52,7 @@ inquirer.prompt([
 ]).then((data) => {
     const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
     team.push(manager);
+    addNewMember();
 })};
 
 function getEngineer() {
@@ -99,7 +101,19 @@ inquirer.prompt([
     addNewMember();
 })}
 
+// function renderHtml() {
+//   fs.writeFileSync(outputPath, render(team), "utf8");
+//   }
 
+// function renderHTML() {
+//   fs.writeFile(team, 'utf8', (error, data) =>
+//   error ? console.error(error) : console.log(data)
+// );
+
+// }  
+function renderHTML() {
+    fs.writeFileSync(outputPath, render(team), "utf-8");
+  };
 function addNewMember() {
   inquirer
   .prompt([
@@ -112,15 +126,10 @@ function addNewMember() {
   .then((data) => { if (data.type === true) {
       newMember();
   } else {
-      renderHtml();
+      renderHTML();
   }; 
   });
 }
-
-
-function renderHtml() {
-    fs.writeFileSync(outputPath, render(team), "utp-8");
-    };
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
