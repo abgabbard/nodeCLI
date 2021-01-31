@@ -12,125 +12,138 @@ const render = require("./lib/htmlRenderer");
 const team = [];
 
 function newExecute() {
-    inquirer.prompt([
-        {
-            type: "checkbox",
-            name: "employeeType",
-            message: "What is your role at the company?",
-            choices: ["Manager", "Intern", "Engineer"],    
-        },
-    ]).then((data) => {
+  inquirer
+    .prompt([
+      {
+        type: "checkbox",
+        name: "employeeType",
+        message: "What is your role at the company?",
+        choices: ["Manager", "Intern", "Engineer"],
+      },
+    ])
+    .then((data) => {
       const typeChecker = data.employeeType.toString();
-        if (typeChecker === "Manager") {
-            getManager();
-        } else if (typeChecker === "Engineer") {
-            getEngineer();
-        } else if (typeChecker === "Intern") {
-            getIntern();
-        }
-    })
+      if (typeChecker === "Manager") {
+        getManager();
+      } else if (typeChecker === "Engineer") {
+        getEngineer();
+      } else if (typeChecker === "Intern") {
+        getIntern();
+      }
+    });
 }
-newExecute(); 
+
+function addNewMember() {
+  inquirer
+    .prompt([
+      {
+        name: "addNewMember",
+        type: "confirm",
+        message: "Do you want to add another team member?",
+      },
+    ])
+    .then((data) => {
+      if (data.addNewMember === true) {
+        newExecute();
+      } else {
+        renderHTML();
+      }
+    });
+}
 
 function getManager() {
-inquirer.prompt([
-    {
+  inquirer
+    .prompt([
+      {
         type: "input",
         message: "What is your employer ID?",
-        name: "ID",
+        name: "id",
       },
       {
         type: "input",
         message: "What is your email?",
-        name: "Email",
+        name: "email",
       },
       {
         type: "input",
         message: "What is your office number?",
         name: "officeNumber",
       },
-]).then((data) => {
-    const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
-    team.push(manager);
-    addNewMember();
-})};
+    ])
+    .then((data) => {
+      const manager = new Manager(
+        data.name,
+        data.id,
+        data.email,
+        data.officeNumber
+      );
+      team.push(manager);
+      addNewMember();
+    });
+}
 
 function getEngineer() {
-inquirer.prompt([
-    {
+  inquirer
+    .prompt([
+      {
         type: "input",
         message: "What is your employer ID?",
-        name: "ID",
+        name: "id",
       },
       {
         type: "input",
         message: "What is your email?",
-        name: "Email",
+        name: "email",
       },
       {
         type: "input",
         message: "What is your github username?",
         name: "GitHub",
       },
-]).then((data) => {
-    const engineer = new Engineer(data.name, data.id, data.email, data.GitHub);
-    team.push(engineer);
-    addNewMember();
-})};
+    ])
+    .then((data) => {
+      const engineer = new Engineer(
+        data.name,
+        data.id,
+        data.email,
+        data.GitHub
+      );
+      team.push(engineer);
+      addNewMember();
+    });
+}
 
 function getIntern() {
-inquirer.prompt([
-    {
+  inquirer
+    .prompt([
+      {
         type: "input",
         message: "What is your employer ID?",
-        name: "ID",
+        name: "id",
       },
       {
         type: "input",
         message: "What is your email?",
-        name: "Email",
+        name: "email",
       },
       {
         type: "input",
         message: "What school are you attending?",
         name: "school",
       },
-]).then((data) => {
-    const intern = new Intern(data.name, data.id, data.email, data.school);
-    team.push(intern);
-    addNewMember();
-})}
-
-// function renderHtml() {
-//   fs.writeFileSync(outputPath, render(team), "utf8");
-//   }
-
-// function renderHTML() {
-//   fs.writeFile(team, 'utf8', (error, data) =>
-//   error ? console.error(error) : console.log(data)
-// );
-
-// }  
-function renderHTML() {
-    fs.writeFileSync(outputPath, render(team), "utf-8");
-  };
-function addNewMember() {
-  inquirer
-  .prompt([
-    {
-      name: "addNewMember",
-      type: "confirm",
-      message: "Do you want to add another team member?",
-    },
-  ])
-  .then((data) => { if (data.type === true) {
-      newMember();
-  } else {
-      renderHTML();
-  }; 
-  });
+    ])
+    .then((data) => {
+      const intern = new Intern(data.name, data.id, data.email, data.school);
+      team.push(intern);
+      addNewMember();
+    });
 }
 
+function renderHTML() {
+  fs.writeFileSync(outputPath, render(team), "utf-8");
+}
+
+newExecute();
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
