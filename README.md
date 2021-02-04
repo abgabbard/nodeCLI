@@ -1,7 +1,7 @@
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)]
-# Engineering Team Profile Generator
-https://github.com/abgabbard/Engineering Team Profile Generator
+[![License: IPL 1.0](https://img.shields.io/badge/License-IPL%201.0-blue.svg)]
+# Engineering Team Generator
+https://github.com/abgabbard/nodeCLI
 # Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
@@ -10,16 +10,20 @@ https://github.com/abgabbard/Engineering Team Profile Generator
 * [Tests](#Tests)
 * [Questions](#Questions)
 # Installation
-The following dependencies must be installed to run the application.
+The following dependencies must be installed to run the application: inquirer, jest
 # Usage
-In order to use this app, When the user runs node app in the terminal - in the same directory - they will be asked if they would like to add a manager, engineer, or intern to the team. Once the user decides which role they would like to add; a list of questions will follow depending on which option the user picks. For example, if you pick Engineer; the program will ask for the github username; whereas the intern question is what school is the intern attending. Once the user finishes adding users to their team, the program will automatically generate new team information in the team.html file under the output folder. Open this in a browser to see the information for the team!
+Once the application is installed the user must 
+open the directory with the index.js file in the terminal and run the following command `node app` to begin the prompts. After this the user must follow the prompts and answer each question accordingly. There are both multiple choice and long form answers.
 # License
-This project is licensed under Apache 2.0 license.
+This project is licensed under IBM license. A license with no conditions whatsoever which dedicates works to the public domain. Unlicensed works, modifications, and larger works may be distributed under different terms and without source code.
 # Contributors
-Contributors: The University of Arizona - providing a solid foundation of starter files for the project.
+Contributors: University of Arizona starter code!
 # Tests
-The following is needed to run the test: Run tests using jest (npm test).
+The following is needed to run the test: To test this app run node test. All the tests in the test files should pass.
 # Description of app
-A permissive license whose main conditions require preservation of copyright and license notices. Contributors provide an express grant of patent rights. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
+This app requests user input via inquirer in order to gen
+erate an HTML file with the engineering team members. The user can enter information for Manager, Enginee
+r, or Intern. Once the user enters the information and does not want to add any more members, the app will generate a team.html file in the output folder. Once opened in a browswer, this file will display infor
+mation about each team member; as well as provide links to the users additional information (i.e.: email or github username) 
 # Questions
 If you have any questions about the repo, open an issue or contact abgabbard
